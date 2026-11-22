@@ -13,7 +13,10 @@
       "require": "./dist/index.cjs"
     }
   },
-  "files": ["dist", "NOTICE"],
+  "files": [
+    "dist",
+    "NOTICE"
+  ],
   "sideEffects": false,
   "scripts": {
     "build": "tsup",
@@ -34,12 +37,20 @@
     "vitest": "^1.6.0"
   },
   "size-limit": [
-    { "path": "dist/index.js", "limit": "80 KB" }
+    {
+      "path": "dist/index.js",
+      "limit": "80 KB"
+    }
   ],
-  "engines": { "node": ">=18" },
+  "engines": {
+    "node": ">=18"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/<org>/nawat.git"
+  },
+  "dependencies": {
+    "zustand": "^5.1.0"
   }
 }
