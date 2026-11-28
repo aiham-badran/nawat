@@ -21,3 +21,5 @@ export {
   registerBlock,
 } from "./registry.js";
 export type { BlockRegistry } from "./registry.js";
+
+export { resolveDirection } from "./rtl.js";

@@ -4,6 +4,7 @@
  */
 
 import { createStore } from "zustand/vanilla";
+import { resolveDirection } from "./rtl.js";
 import type {
   Block,
   BlockType,
@@ -29,12 +30,6 @@ function snapshot<T>(value: T): T {
     return structuredClone(value);
   }
   return JSON.parse(JSON.stringify(value)) as T;
-}
-
-// Maps locale → direction. Replaced by resolveDirection (T-01-04)
-// when locale/content-aware resolution is wired into the editor (T-06-02).
-function localeToDirection(locale: Locale): Direction {
-  return locale === "ar" ? "rtl" : "ltr";
 }
 
 // ─────────────────────────────────────────────────────────────
@@ -84,7 +79,7 @@ export function createEditorStore(
     document: initial ? snapshot(initial) : snapshot(EMPTY_DOCUMENT),
     activeBlockId: null,
     locale,
-    direction: localeToDirection(locale),
+    direction: resolveDirection(locale),
 
     addBlock(type, data, opts) {
       const id = generateId();
@@ -202,7 +197,7 @@ export function createEditorStore(
     },
 
     setLocale(locale) {
-      set({ locale, direction: localeToDirection(locale) });
+      set({ locale, direction: resolveDirection(locale) });
     },
 
     setDirection(direction) {
